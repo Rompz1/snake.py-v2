@@ -2,19 +2,19 @@ import pygame
 import time
 import random
 
-# Initialisation des dimensions de la fenêtre
+
 window_x = 720
 window_y = 480
 
-# Initialisation de Pygame
+
 pygame.init()
 
-# Couleurs
+
 green = pygame.Color(0, 255, 0)
 black = pygame.Color(0, 0, 0)
 red = pygame.Color(255, 0, 0)
 
-# Fonction pour afficher "Game Over"
+
 def game_over(game_window):
     font = pygame.font.SysFont('arial', 50)
     game_over_surface = font.render('Game Over', True, red)
@@ -24,9 +24,9 @@ def game_over(game_window):
     pygame.quit()
     quit()
 
-# Boucle principale du jeu
+
 def game_loop():
-    # Initialisation de la fenêtre et des variables
+    
     game_window = pygame.display.set_mode((window_x, window_y))
     pygame.display.set_caption('Snake')
     fps = pygame.time.Clock()
@@ -57,11 +57,11 @@ def game_loop():
                     direction_x = 10
                     direction_y = 0
 
-        # Mise à jour de la position du serpent
+        
         head = [snake_body[0][0] + direction_x, snake_body[0][1] + direction_y]
         snake_body.insert(0, head)
 
-        # Vérification de la collision avec la pomme
+        
         if head == pomme:
             pomme = [random.randrange(1, (window_x // 10)) * 10,
                      random.randrange(1, (window_y // 10)) * 10]
@@ -69,13 +69,13 @@ def game_loop():
         else:
             snake_body.pop()
 
-        # Vérification des collisions avec les murs ou le corps
+        
         if (head[0] < 0 or head[0] >= window_x or
                 head[1] < 0 or head[1] >= window_y or
                 head in snake_body[1:]):
             game_over(game_window)
 
-        # Affichage du jeu
+        
         game_window.fill(green)
         for pos in snake_body:
             pygame.draw.rect(game_window, black, pygame.Rect(pos[0], pos[1], 10, 10))
@@ -86,5 +86,5 @@ def game_loop():
 
     pygame.quit()
 
-# Lancer le jeu
+
 game_loop()
